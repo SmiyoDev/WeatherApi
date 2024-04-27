@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Enter a city name" name="city_name">
+            <button type="submit">Get Weather</button>
+        </form>
+        {% if city_weather %}
+        <div class="weather-container">
+            <h4>Weather in {{ city_weather.name }}</h4>
+            <p>Temperature: {{ city_weather.main.temp }}°C</p>
+            <p>Humidity: {{ city_weather.main.humidity }}%</p>
+            <p>Weather: {{ city_weather.weather.0.description }}</p>
+        </div>
+        {% endif %}
+    </div>
+    <div class="big-container">
+        <div class="container">
+            <h4>Fact</h4>
+            <p>{{fact}}</p>
+        </div>
+        <div class="container">
+            <h4>Bored?</h4>
+            <p>{{activity}}</p>
+        </div>
+        <div class="container">
+            <h4>Dog</h4>
+            <img src="{{dog}}" alt="dog">
+        </div>
+    </div>
+</body>
+</html>
